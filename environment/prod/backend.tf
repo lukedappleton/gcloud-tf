@@ -1,7 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket  = modules.provisioning.backend_bucket
+    bucket  = "prod-lda-terraform-state"
     prefix  = "terraform/state"
-    project = var.project_id
   }
 }
