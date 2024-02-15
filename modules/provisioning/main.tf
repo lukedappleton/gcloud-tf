@@ -6,7 +6,5 @@ resource "google_storage_bucket" "backend_bucket" {
     versioning {
         enabled = true
     }
-    uniform_bucket_level_access {
-        enabled = true
-    }
+    uniform_bucket_level_access = true
 }
