@@ -23,6 +23,7 @@ resource "google_container_cluster" "primary" {
     subnetwork                 = google_compute_subnetwork.subnet.self_link
     logging_service            = "logging.googleapis.com/kubernetes"
     monitoring_service         = "monitoring.googleapis.com/kubernetes"
+    min_master_version         = data.google_container_engine_versions.gke_version.version_prefix
     node_config                {
         disk_size_gb = var.disk_size
     }
