@@ -29,7 +29,7 @@ resource "google_container_node_pool" "primary_nodes" {
     name       = "${google_container_cluster.primary.name}-nodes"
     location   = var.region
     cluster    = google_container_cluster.primary.name
-    version    = data.google_container_engine_versions.gke_version.release_channel_latest_version["STABLE"]
+    version    = data.google_container_engine_versions.gke_version.version_prefix
     node_count = var.node_count
 
     node_config {
