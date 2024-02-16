@@ -8,7 +8,7 @@ resource "google_service_account" "gke_sa" {
     display_name = "GKE Service Account"
 }
 
-resource "google_project_service" "example_kubernetes_api" {
+resource "google_project_service" "kubernetes_api" {
   project = var.project_id
   service = "container.googleapis.com"
 }
@@ -29,7 +29,7 @@ resource "google_container_node_pool" "primary_nodes" {
     name       = "${google_container_cluster.primary.name}-nodes"
     location   = var.region
     cluster    = google_container_cluster.primary.name
-    #version    = data.google_container_engine_versions.gke_version.release_channel_latest_version["STABLE"]
+    version    = data.google_container_engine_versions.gke_version.release_channel_latest_version["STABLE"]
     node_count = var.node_count
 
     node_config {
