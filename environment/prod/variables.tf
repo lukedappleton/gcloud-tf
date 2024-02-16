@@ -7,11 +7,6 @@ variable "region" {
   default     = "us-central1"
 }
 
-variable "zone" {
-  description = "The zone for Google Cloud resources"
-  default     = "us-central1-a"
-}
-
 variable "environment" {
   description = "The environment for the GCP resources"
   default     = "prod"
