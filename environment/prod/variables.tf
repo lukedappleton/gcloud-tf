@@ -39,5 +39,5 @@ variable "allowed_ip_ranges" {
 
 variable "disk_size" {
   description = "The size of the disk to use for the GKE cluster"
-  default     = 100
+  default     = 50
 }
