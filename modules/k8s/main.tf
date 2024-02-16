@@ -28,6 +28,7 @@ resource "google_container_node_pool" "primary_nodes" {
     node_count = var.node_count
 
     node_config {
+        machine_type = var.machine_type
         preemptible  = false
         service_account = google_service_account.gke_sa.email
         oauth_scopes = [
@@ -37,12 +38,7 @@ resource "google_container_node_pool" "primary_nodes" {
             "https://www.googleapis.com/auth/monitoring",
             "https://www.googleapis.com/auth/dataproc"
             ]
-    }
-
-    machine_type = var.machine_type
-    tags         = ["gke-nodes", "${var.environment}-gke-nodes"]
-    metadata = {
-      disable-legacy-endpoints = "true"
+        tags = ["${var.environment}-gke-nodes"]
     }
 }
 
