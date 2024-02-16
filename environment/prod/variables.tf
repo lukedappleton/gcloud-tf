@@ -19,7 +19,7 @@ variable "environment" {
 
 variable "k8s_version" {
   description = "The version of Kubernetes to use for the GKE cluster"
-  default     = "1.29."
+  default     = "1.29.*"
 }
 
 variable "node_count" {
