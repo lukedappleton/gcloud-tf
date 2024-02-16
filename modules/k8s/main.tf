@@ -14,15 +14,18 @@ resource "google_project_service" "kubernetes_api" {
 }
 
 resource "google_container_cluster" "primary" {
-    name                     = var.cluster_name
-    location                 = var.region
-    project                  = var.project_id
-    remove_default_node_pool = true
-    initial_node_count       = 1
-    network                  = google_compute_network.vpc.self_link
-    subnetwork               = google_compute_subnetwork.subnet.self_link
-    logging_service          = "logging.googleapis.com/kubernetes"
-    monitoring_service       = "monitoring.googleapis.com/kubernetes"
+    name                       = var.cluster_name
+    location                   = var.region
+    project                    = var.project_id
+    remove_default_node_pool   = true
+    initial_node_count         = 1
+    network                    = google_compute_network.vpc.self_link
+    subnetwork                 = google_compute_subnetwork.subnet.self_link
+    logging_service            = "logging.googleapis.com/kubernetes"
+    monitoring_service         = "monitoring.googleapis.com/kubernetes"
+    auto_provisioning_defaults = {
+        disk_size = var.disk_size
+    }
 }
 
 resource "google_container_node_pool" "primary_nodes" {

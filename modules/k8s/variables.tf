@@ -30,3 +30,7 @@ variable "allowed_ip_ranges" {
   description = "The list of CIDR ranges to allow access to the GKE cluster"
   type = list(string)
 }
+
+variable "disk_size" {
+  description = "The size of the disk to use for the GKE cluster"
+}
