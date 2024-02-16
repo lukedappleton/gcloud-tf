@@ -15,7 +15,7 @@ resource "google_project_service" "kubernetes_api" {
 
 resource "google_container_cluster" "primary" {
     name                       = var.cluster_name
-    location                   = var.region
+    location                   = var.zone
     project                    = var.project_id
     remove_default_node_pool   = true
     initial_node_count         = 1
@@ -31,7 +31,7 @@ resource "google_container_cluster" "primary" {
 
 resource "google_container_node_pool" "primary_nodes" {
     name       = "${google_container_cluster.primary.name}-nodes"
-    location   = var.region
+    location   = var.zone
     cluster    = google_container_cluster.primary.name
     version    = data.google_container_engine_versions.gke_version.version_prefix
     node_count = var.node_count
