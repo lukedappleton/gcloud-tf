@@ -23,8 +23,8 @@ resource "google_container_cluster" "primary" {
     subnetwork                 = google_compute_subnetwork.subnet.self_link
     logging_service            = "logging.googleapis.com/kubernetes"
     monitoring_service         = "monitoring.googleapis.com/kubernetes"
-    auto_provisioning_defaults {
-        disk_size = var.disk_size
+    node_config                {
+        disk_size_gb = var.disk_size
     }
 }
 
