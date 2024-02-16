@@ -2,12 +2,12 @@ variable "project_id" {
   description = "The ID of the Google Cloud project"
 }
 
-variable "region" {
-  description = "The region for the GKE cluster"
+variable "environment" {
+  description = "The environment to deploy resources in"
 }
 
-variable "zone" {
-  description = "The zone for Google Cloud resources"
+variable "region" {
+  description = "The region for the GKE cluster"
 }
 
 variable "cluster_name" {
