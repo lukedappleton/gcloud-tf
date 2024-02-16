@@ -8,6 +8,11 @@ resource "google_service_account" "gke_sa" {
     display_name = "GKE Service Account"
 }
 
+resource "google_project_service" "example_kubernetes_api" {
+  project = var.project_id
+  service = "container.googleapis.com"
+}
+
 resource "google_container_cluster" "primary" {
     name                     = var.cluster_name
     location                 = var.region
