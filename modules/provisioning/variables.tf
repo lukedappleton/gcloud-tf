@@ -1,5 +1,5 @@
 variable "environment" {
-  description = "The environment for the bucket (e.g., 'prod' or 'dev')"
+  description = "The environment for the project"
 }
 
 variable "project_id" {
