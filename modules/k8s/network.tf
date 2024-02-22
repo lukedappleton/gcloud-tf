@@ -1,12 +1,12 @@
 resource "google_compute_network" "vpc" {
-    name                                   = "${var.cluster_name}-vpc"
-    auto_create_subnetworks                = false
-    routing_mode                           = "GLOBAL"
-    project                                = var.project_id
-    description                            = "Network to use as shared VPC for Data projects"
-    delete_default_internet_gateway_routes = false
-    mtu                                    = 0
-    enable_ula_internal_ipv6               = false
+    name                            = "${var.cluster_name}-vpc"
+    auto_create_subnetworks         = false
+    routing_mode                    = "GLOBAL"
+    project                         = var.project_id
+    description                     = "Network to use as shared VPC for Data projects"
+    delete_default_routes_on_create = false
+    mtu                             = 0
+    enable_ula_internal_ipv6        = false
 }
 
 resource "google_compute_subnetwork" "subnet" {
