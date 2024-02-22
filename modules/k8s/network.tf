@@ -16,7 +16,7 @@ resource "google_compute_subnetwork" "subnet" {
     region                   = var.region
     network                  = google_compute_network.vpc.self_link
     private_ip_google_access = "true"
-    secondary_ranges         = [
+    secondary_ip_range       = [
         for range_name, range in var.secondary_ranges : {
             range_name    = range_name
             ip_cidr_range = range
