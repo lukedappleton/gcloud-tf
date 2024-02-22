@@ -1,12 +1,12 @@
 module "provisioning" {
-    source      = "git@github.com:lukedappleton/gcloud-tf.git//modules/provisioning?ref=ad77352"
+    source      = "git@github.com:lukedappleton/gcloud-tf.git//modules/provisioning?ref=4166326"
     environment = var.environment
     project_id  = var.project_id
     region      = var.region
 }
 
 module "gke_cluster" {
-  source            = "git@github.com:lukedappleton/gcloud-tf.git//modules/k8s?ref=ad77352"
+  source            = "git@github.com:lukedappleton/gcloud-tf.git//modules/k8s?ref=4166326"
   project_id        = var.project_id
   region            = var.region
   zone              = "${var.region}-a"
@@ -16,5 +16,6 @@ module "gke_cluster" {
   node_count        = var.node_count
   machine_type      = var.machine_type
   allowed_ip_ranges = var.allowed_ip_ranges
+  secondary_ranges  = var.secondary_ranges
   disk_size         = var.disk_size
 }

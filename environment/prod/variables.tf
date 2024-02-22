@@ -36,3 +36,12 @@ variable "disk_size" {
   description = "The size of the disk to use for the GKE cluster"
   default     = 50
 }
+
+variable "secondary_ranges" {
+  description = "The list of secondary ranges to use for the Data VPC"
+  type        = map(string)
+  default     = {
+    gke-pods     = "10.200.0.0/16"
+    gke-services = "10.201.0.0/16"
+  }
+}

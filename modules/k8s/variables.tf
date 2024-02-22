@@ -38,3 +38,8 @@ variable "allowed_ip_ranges" {
 variable "disk_size" {
   description = "The size of the disk to use for the GKE cluster"
 }
+
+variable "secondary_ranges" {
+  description = "The list of secondary ranges to use for the Data VPC"
+  type = map(string)
+}
