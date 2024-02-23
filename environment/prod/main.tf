@@ -1,12 +1,12 @@
 module "provisioning" {
-    source      = "git@github.com:lukedappleton/gcloud-tf.git//modules/provisioning?ref=3c6780b"
+    source      = "git@github.com:lukedappleton/gcloud-tf.git//modules/provisioning?ref=95ab2de"
     environment = var.environment
     project_id  = var.project_id
     region      = var.region
 }
 
 module "gke_cluster" {
-  source            = "git@github.com:lukedappleton/gcloud-tf.git//modules/k8s?ref=3c6780b"
+  source            = "git@github.com:lukedappleton/gcloud-tf.git//modules/k8s?ref=95ab2de"
   project_id        = var.project_id
   region            = var.region
   zone              = "${var.region}-a"

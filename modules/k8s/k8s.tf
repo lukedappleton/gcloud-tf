@@ -38,6 +38,7 @@ resource "google_container_cluster" "primary" {
             cidr_block   = var.master_cidr
             display_name = "Master CIDR"
         }
+    }
     vertical_pod_autoscaling {
         enabled = true
     }
@@ -77,12 +78,6 @@ resource "google_container_cluster" "primary" {
             disabled = false
         }
         http_load_balancing {
-            disabled = false
-        }
-        kubernetes_dashboard {
-            disabled = false
-        }
-        network_policy_config {
             disabled = false
         }
     }
