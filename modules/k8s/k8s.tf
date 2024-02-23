@@ -67,10 +67,8 @@ resource "google_container_cluster" "primary" {
     enable_shielded_nodes = true
     datapath_provider = "DATAPATH_PROVIDER_UNSPECIFIED"
     maintenance_policy {
-        window {
-            daily_maintenance_window {
-                start_time = "05:00"
-            }
+        daily_maintenance_window {
+            start_time = "05:00"
         }
     }
     addons_config {
