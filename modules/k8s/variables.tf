@@ -43,3 +43,8 @@ variable "secondary_ranges" {
   description = "The list of secondary ranges to use for the Data VPC"
   type = map(string)
 }
+
+variable "master_cidr" {
+  description = "The CIDR range to use for the k8s master"
+  type = string
+}

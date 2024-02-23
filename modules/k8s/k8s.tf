@@ -13,6 +13,7 @@ resource "google_container_cluster" "primary" {
     location                   = var.zone
     project                    = var.project_id
     remove_default_node_pool   = true
+    default_max_pods_per_node  = 50
     initial_node_count         = 1
     network                    = google_compute_network.vpc.self_link
     subnetwork                 = google_compute_subnetwork.subnet.self_link
@@ -21,6 +22,69 @@ resource "google_container_cluster" "primary" {
     min_master_version         = data.google_container_engine_versions.gke_version.version_prefix
     node_config                {
         disk_size_gb = var.disk_size
+    }
+    ip_allocation_policy {
+        cluster_secondary_range_name  = keys(var.secondary_ranges)[0]
+        services_secondary_range_name = keys(var.secondary_ranges)[1]
+        stack_type                    = "IPV4"
+    }
+    private_cluster_config {
+        enable_private_endpoint = true
+        enable_private_nodes    = true
+        master_ipv4_cidr_block  = var.master_cidr
+    }
+    master_authorized_networks_config {
+        cidr_blocks {
+            cidr_block   = var.master_cidr
+            display_name = "Master CIDR"
+        }
+    vertical_pod_autoscaling {
+        enabled = true
+    }
+    cluster_autoscaling {
+        enabled = true
+        auto_provisioning_defaults {
+            service_account = google_service_account.gke_sa.email
+            oauth_scopes = [
+                "https://www.googleapis.com/auth/logging.write",
+                "https://www.googleapis.com/auth/monitoring"
+            ]
+            management {
+                auto_repair  = true
+                auto_upgrade = true
+            }
+            disk_size = var.disk_size
+            disk_type  = "pd-standard"
+        }
+        autoscaling_profile = "optimize-utilization"
+        resource_limits {
+            resource_type = "cpu"
+            minimum       = 1
+            maximum       = 100
+        }
+    }
+    enable_shielded_nodes = true
+    datapath_provider = "DATAPATH_PROVIDER_UNSPECIFIED"
+    maintenance_policy {
+        window {
+            daily_maintenance_window {
+                start_time = "05:00"
+            }
+        }
+    }
+    addons_config {
+        horizontal_pod_autoscaling {
+            disabled = false
+        }
+        http_load_balancing {
+            disabled = false
+        }
+        kubernetes_dashboard {
+            disabled = false
+        }
+        network_policy_config {
+            disabled = false
+        }
     }
 }
 
@@ -37,8 +101,6 @@ resource "google_container_node_pool" "primary_nodes" {
         preemptible  = false
         service_account = google_service_account.gke_sa.email
         oauth_scopes = [
-            "https://www.googleapis.com/auth/compute",
-            "https://www.googleapis.com/auth/devstorage.read_only",
             "https://www.googleapis.com/auth/logging.write",
             "https://www.googleapis.com/auth/monitoring"
         ]

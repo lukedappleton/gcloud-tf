@@ -45,3 +45,8 @@ variable "secondary_ranges" {
     gke-services = "10.201.0.0/16"
   }
 }
+
+variable "master_cidr" {
+  description = "The CIDR range for the GKE master"
+  default     = "192.168.0.0/28"
+}
