@@ -7,17 +7,17 @@ resource "google_service_account" "gke_sa" {
 resource "google_project_iam_member" "gke_sa_node_service" {
     project = var.project_id
     role    = "roles/container.defaultNodeServiceAccount"
-    member  = google_service_account.gke_sa.email
+    member  = "serviceAccount:${google_service_account.gke_sa.email}"
 }
 
 resource "google_project_iam_member" "gke_sa_artifact_registry" {
     project = var.project_id
     role    = "roles/artifactregistry.reader"
-    member  = google_service_account.gke_sa.email
+    member  = "serviceAccount:${google_service_account.gke_sa.email}"
 }
 
 resource "google_project_iam_member" "gke_sa_storage" {
     project = var.project_id
     role    = "roles/storage.objectViewer"
-    member  = google_service_account.gke_sa.email
+    member  = "serviceAccount:${google_service_account.gke_sa.email}"
 }

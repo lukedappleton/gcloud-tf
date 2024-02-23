@@ -57,7 +57,7 @@ resource "google_container_cluster" "primary" {
             disk_size = var.disk_size
             disk_type  = "pd-standard"
         }
-        autoscaling_profile = "optimize-utilization"
+        autoscaling_profile = "BALANCED OPTIMIZE_UTILIZATION"
         resource_limits {
             resource_type = "cpu"
             minimum       = 1
